@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Info Page"),
+    return Center(
+      child: Container(
+        child: Text("Info Page"),
+        color: Colors.yellow,
+      ),
     );
   }
 }
