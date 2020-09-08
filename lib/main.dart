@@ -1,5 +1,7 @@
+import 'package:covid19_app/Styles/fonts.dart';
 import 'package:covid19_app/homePage.dart';
 import 'package:flutter/material.dart';
+
 import './constants.dart';
 
 void main() {
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: appTitle,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
+        textTheme: TextTheme(headline1: headerTextTheme, bodyText1: bodyTextTheme),
       ),
       home: HomePage(),
     );
