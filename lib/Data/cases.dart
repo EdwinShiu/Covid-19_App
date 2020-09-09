@@ -7,16 +7,16 @@ class CaseApi {
     return CaseApi(
       caseList: List<Case>.from(json?.map((rawCase) {
         return Case(
-          caseNumber: rawCase["Case no."],
-          reportDate: rawCase["Report date"],
-          dateOfOnset: rawCase["Date of onset"],
-          gender: rawCase["gender"],
+          caseNumber: int.parse(rawCase["Case no."]),
+          reportDate: rawCase["Report date"].toString(),
+          dateOfOnset: rawCase["Date of onset"].toString(),
+          gender: rawCase["Gender"].toString(),
           age: rawCase["Age"],
-          nameOfHospital: rawCase["Name of hospital admitted"],
-          caseState: rawCase["Hospitalised/Discharged/Deceased"],
-          resident: rawCase["HK/Non-HK resident"],
-          classification: rawCase["Case classification*"],
-          possibility: rawCase["Confirmed/probable"],
+          nameOfHospital: rawCase["Name of hospital admitted"].toString(),
+          caseState: rawCase["Hospitalised/Discharged/Deceased"].toString(),
+          resident: rawCase["HK/Non-HK resident"].toString(),
+          classification: rawCase["Case classification*"].toString(),
+          possibility: rawCase["Confirmed/probable"].toString(),
         );
       })),
     );

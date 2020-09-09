@@ -1,5 +1,7 @@
 
+import 'package:covid19_app/Pages/Cases/casePage.dart';
 import 'package:covid19_app/Pages/Info/infoPage.dart';
+import 'package:covid19_app/constants.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,24 +18,24 @@ class HomePage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    color: Color(0xFF031D44),
+                    color: primaryColor,
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    color: Color(0xFF04395E),
+                    color: secondaryColor,
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    color: Color(0xFF679289),
+                    color: thirdColor,
                   ),
                 ),
               ],
             ),
           ),
         ),
-        body: InfoPage(),
+        body: CasePage(),
       ),
     );
   }
