@@ -1,4 +1,4 @@
-import 'package:covid19_app/Components/CasePage/caseList.dart';
+import 'package:covid19_app/Components/CaseList/caseList.dart';
 import 'package:covid19_app/Components/loadingScreen.dart';
 import 'package:covid19_app/Data/cases.dart';
 import 'package:covid19_app/Data/fetchCase.dart';
@@ -12,15 +12,23 @@ class CasePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text("casePage"),
-        FutureBuilder<CaseApi>(
-          future: fetchCases(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return LoadingScreen(thirdColor);
-            }
-            return CaseListComponent(snapshot.data);
-          },
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+          child: Text(
+            "Total Case",
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        ),
+        Expanded(
+          child: FutureBuilder<CaseApi>(
+            future: fetchCases(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return LoadingScreen(thirdColor);
+              }
+              return CaseListComponent(snapshot.data);
+            },
+          ),
         ),
       ],
     );
