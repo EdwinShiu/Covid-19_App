@@ -1,13 +1,12 @@
+import 'package:covid19_app/Components/CaseList/caseRecord.dart';
 import 'package:covid19_app/Data/cases.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CaseListComponent extends StatelessWidget {
-  final CaseApi cases;
-
-  CaseListComponent(this.cases);
-
   @override
   Widget build(BuildContext context) {
+    final cases = Provider.of<CaseApi>(context, listen: false);
     //print(cases.caseList.length.toString());
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,13 +22,10 @@ class CaseListComponent extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
+              cacheExtent: 500,
               itemCount: cases.caseList.length,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  color: Colors.yellow,
-                  height: 100,
-                );
+                return CaseRecord(index);
               }
             ),
           ),

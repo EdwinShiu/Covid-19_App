@@ -1,8 +1,4 @@
 import 'package:covid19_app/Components/CaseList/caseList.dart';
-import 'package:covid19_app/Components/loadingScreen.dart';
-import 'package:covid19_app/Data/cases.dart';
-import 'package:covid19_app/Data/fetchCase.dart';
-import 'package:covid19_app/constants.dart';
 import 'package:flutter/material.dart';
 
 class CasePage extends StatelessWidget {
@@ -20,15 +16,7 @@ class CasePage extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: FutureBuilder<CaseApi>(
-            future: fetchCases(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return LoadingScreen(thirdColor);
-              }
-              return CaseListComponent(snapshot.data);
-            },
-          ),
+          child: CaseListComponent(),
         ),
       ],
     );
