@@ -1,6 +1,8 @@
+import 'package:covid19_app/Data/pageControl.dart';
 import 'package:covid19_app/Styles/fonts.dart';
 import 'package:covid19_app/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './constants.dart';
 
@@ -17,7 +19,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         textTheme: TextTheme(headline1: headerTextTheme, bodyText1: bodyTextTheme),
       ),
-      home: HomePage(),
+      home: //Provider<PageControl>.value(
+        //value: PageControl(),
+        //child: 
+        HomePage(),
+      //),
     );
   }
 }

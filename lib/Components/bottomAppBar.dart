@@ -3,6 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
+
+  PageController _mainPageController;
+
+  BottomNavBar(this._mainPageController);
+  
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -17,15 +22,8 @@ class BottomNavBar extends StatelessWidget {
                 color: primaryColor,
                 child: InkWell(
                   onTap: () {
-                    final newRoute = "/infoPage";
-                    String currentRoute = "";
-                    navigatorKey.currentState.popUntil((route) {
-                      print("route" + route.settings.name.toString());
-                      currentRoute = route.settings.name;
-                      return true;
-                    });
-                    print("current route " + currentRoute.toString());
-                    navigatorKey.currentState.pushReplacementNamed(newRoute);
+                    print("button1");
+                    _mainPageController.animateToPage(0, duration: const Duration(microseconds: 1), curve: Curves.linear);
                   },
                 ),
               ),
@@ -46,6 +44,7 @@ class BottomNavBar extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     print("button3");
+                    _mainPageController.animateToPage(1, duration: const Duration(microseconds: 1), curve: Curves.linear);
                   },
                 ),
               ),
