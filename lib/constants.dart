@@ -13,3 +13,5 @@ const color1 = Color(0xFF153242);
 const color2 = Color(0xFF284B63);
 
 const color3 = Color(0xFF49BEAA);
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

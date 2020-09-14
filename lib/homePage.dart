@@ -4,6 +4,7 @@ import 'package:covid19_app/Data/cases.dart';
 import 'package:covid19_app/Data/fetchCase.dart';
 import 'package:covid19_app/Pages/Cases/casePage.dart';
 import 'package:covid19_app/Pages/Info/infoPage.dart';
+import 'package:covid19_app/Components/bottomAppBar.dart';
 import 'package:covid19_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,33 +22,21 @@ class HomePage extends StatelessWidget {
               return LoadingScreen(Color(0xFF333333));
             }
             return Scaffold(
-            bottomNavigationBar: BottomAppBar(
-              elevation: 10,
-                child: SizedBox(
-                  height: 80.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          color: primaryColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          color: secondaryColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          color: thirdColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            body: CasePage(),
+            bottomNavigationBar: BottomNavBar(),
+            body: Navigator(
+              key: navigatorKey,
+              onGenerateRoute: (settings) {
+                print(settings.name);
+                return MaterialPageRoute(
+                  builder: (context) {
+                    switch (settings.name) {
+                      case "/infoPage": return InfoPage();
+                      default: return Container();
+                    }
+                  }
+                );
+              },
+            ),
           );
         },
       ),

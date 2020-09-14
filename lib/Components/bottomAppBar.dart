@@ -1,28 +1,58 @@
+import 'package:covid19_app/constants.dart';
 import 'package:flutter/cupertino.dart';
-/*
+import 'package:flutter/material.dart';
 
-Widget bottomAppBar(BuildContext context) {
-  return BottomNavigationBar(
-    showSelectedLabels: false,
-    showUnselectedLabels: false,
-    backgroundColor: Color(0xFF031D44),
-    items: [
-      BottomNavigationBarItem(
-        icon: Container(),
-        backgroundColor: Color(0xFF031D44),
-        title: Text(""),
+class BottomNavBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      elevation: 10,
+      child: SizedBox(
+        height: 80.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Material(
+                color: primaryColor,
+                child: InkWell(
+                  onTap: () {
+                    final newRoute = "/infoPage";
+                    String currentRoute = "";
+                    navigatorKey.currentState.popUntil((route) {
+                      print("route" + route.settings.name.toString());
+                      currentRoute = route.settings.name;
+                      return true;
+                    });
+                    print("current route " + currentRoute.toString());
+                    navigatorKey.currentState.pushReplacementNamed(newRoute);
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: Material(
+                color: secondaryColor,
+                child: InkWell(
+                  onTap: () {
+                    print("button2");
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: Material(
+                color: thirdColor,
+                child: InkWell(
+                  onTap: () {
+                    print("button3");
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      BottomNavigationBarItem(
-        icon: Container(),
-        backgroundColor: Color(0xFF04395E),
-        title: Text(""),
-      ),
-      BottomNavigationBarItem(
-        icon: Container(),
-        backgroundColor: Color(0xFF679289),
-        title: Text(""),
-      ),
-    ],
-  );
+    );
+  }
 }
-*/
