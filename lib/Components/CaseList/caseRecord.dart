@@ -35,8 +35,38 @@ class CaseRecord extends StatelessWidget {
           ),
           Expanded(
             flex: 8,
-            child: Container(
+            child: Stack(
+              children: [
+                Container(
+                  color: Colors.red,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Age: " + cases.caseList[index].age.toString() + " " + cases.caseList[index].gender,
+                          ),
 
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Onset Date: " + cases.caseList[index].dateOfOnset + " Confirmed Date: " + cases.caseList[index].reportDate,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
+                  ),
+                  margin: EdgeInsets.only(right: 10)
+                ),
+              ],
             ),
           ),
         ],
