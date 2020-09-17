@@ -9,13 +9,31 @@ class CaseRecord extends StatelessWidget {
 
   CaseRecord(this.index);
 
+  Color _selectColor(status) {
+    switch(status) {
+      case "Hospitalised": return colorHospital;
+      case "Discharge": return colorDischarged;
+      case "Deceased": return colorDeceased;
+      case "Penfing admission": return colorPending;
+      default: return colorNormal;
+    }
+  }
+
+  String _gender(gender) {
+    switch(gender) {
+      case "M": return "Male";
+      case "F": return "Female";
+      default: return " - ";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final cases = Provider.of<CaseApi>(context, listen: false);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         color: Color.fromRGBO(245, 250, 250, 1),
       ),
       height: 160,
@@ -27,10 +45,14 @@ class CaseRecord extends StatelessWidget {
             flex: 1,
             child: Container(
               height: double.infinity,
-              color: color1,
+              padding: EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)),
+                color: color1,
+              ),
               child: Text(
                 cases.caseList[index].caseNumber.toString(),
-                style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white, fontSize: 24),
+                style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white, fontSize: 16),
               ),
             ),
           ),
@@ -39,7 +61,10 @@ class CaseRecord extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  color: Colors.red,
+                  decoration: BoxDecoration(
+                    color: _selectColor(cases.caseList[index].caseState),
+                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(5), topRight: Radius.circular(5)),
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -54,7 +79,7 @@ class CaseRecord extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Age " + cases.caseList[index].age.toString() + " " + cases.caseList[index].gender,
+                              "Age " + cases.caseList[index].age.toString() + " " + _gender(cases.caseList[index].gender),
                               style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
                             ),
                           ),

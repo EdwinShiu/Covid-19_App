@@ -2,7 +2,6 @@ import 'package:covid19_app/Data/pageControl.dart';
 import 'package:covid19_app/Styles/fonts.dart';
 import 'package:covid19_app/homePage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import './constants.dart';
 
