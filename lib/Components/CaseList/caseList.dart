@@ -20,6 +20,10 @@ class CaseListComponent extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 26),
             ),
           ),
+          Container(
+            color: Colors.yellow,
+            height: 48,
+          ),
           Expanded(
             child: ListView.builder(
               cacheExtent: 500,
