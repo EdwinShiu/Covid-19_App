@@ -34,6 +34,7 @@ class BottomNavBar extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     print("button2");
+                    _mainPageController.animateToPage(1, duration: const Duration(microseconds: 1), curve: Curves.linear);
                   },
                 ),
               ),
@@ -44,7 +45,6 @@ class BottomNavBar extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     print("button3");
-                    _mainPageController.animateToPage(1, duration: const Duration(microseconds: 1), curve: Curves.linear);
                   },
                 ),
               ),
