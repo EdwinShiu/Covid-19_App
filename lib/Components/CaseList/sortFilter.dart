@@ -26,7 +26,7 @@ class SortFilter extends ChangeNotifier {
 }
 
 class ListPage extends ChangeNotifier{
-  int _page; //
+  int _page;
   int _maxPage;
 
   ListPage(int numberOfCases) {

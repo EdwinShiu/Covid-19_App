@@ -102,6 +102,9 @@ class CaseRecord extends StatelessWidget {
                             children: [
                               Text(
                                 "Onset Date:",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
                               Text(
                                 cases.caseList[index].dateOfOnset,
@@ -109,12 +112,15 @@ class CaseRecord extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(width: 12),
+                          SizedBox(width: 8),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Confirmed Date: ",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
                               Text(
                                 cases.caseList[index].reportDate,
@@ -122,12 +128,15 @@ class CaseRecord extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(width: 12),
+                          SizedBox(width: 8),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Name of Hospital: ",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
                               Text(
                                 (cases.caseList[index].nameOfHospital == "") ? " - " : cases.caseList[index].nameOfHospital,
@@ -145,6 +154,9 @@ class CaseRecord extends StatelessWidget {
                             children: [
                               Text(
                                 "HK/Non-HK Resident:",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
                               Text(
                                 cases.caseList[index].resident,
@@ -158,6 +170,9 @@ class CaseRecord extends StatelessWidget {
                             children: [
                               Text(
                                 "Confirmed/Probable:",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
                               Text(
                                 cases.caseList[index].possibility,
@@ -175,6 +190,9 @@ class CaseRecord extends StatelessWidget {
                           children: [
                             Text(
                               "Case Classification:",
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
                             ),
                             Text(
                               cases.caseList[index].classification,

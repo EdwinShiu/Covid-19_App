@@ -41,11 +41,12 @@ class CaseListComponent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       MaterialButton(
+                        minWidth: 120,
                         color: Colors.white,
                         elevation: 0,
                         child: Text(
                           (sortFilter.sortingOrder == SortingOrder.ascending) ? "Ascending" : "Descending",
-                          style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
+                          style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 18),
                         ),
                         onPressed: () {
                         print(sortFilter.sortingOrder);
@@ -55,13 +56,13 @@ class CaseListComponent extends StatelessWidget {
                       },
                     ),
                       Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(left: 10),
                         child: MaterialButton(
                           color: Colors.white,
                           elevation: 0,
                           child: Text(
                             (sortFilter.filterOrder == FilterOrder.showAll) ? "Show All" : "Show 100",
-                            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
+                            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 18),
                           ),
                           onPressed: () {
                             print(sortFilter.filterOrder);
@@ -75,13 +76,13 @@ class CaseListComponent extends StatelessWidget {
                         child: SizedBox(),
                       ),
                       ButtonTheme(
-                        minWidth: 30,
+                        minWidth: 20,
                         child: MaterialButton(
                           color: Colors.white,
                           elevation: 0,
                           child: Text(
                             "<",
-                            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
+                            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 20),
                           ),
                           onPressed: () {
                             listPage.decreasePage();
@@ -90,13 +91,13 @@ class CaseListComponent extends StatelessWidget {
                         ),
                       ),
                       ButtonTheme(
-                        minWidth: 30,
+                        minWidth: 20,
                         child: MaterialButton(
                           color: Colors.white,
                           elevation: 0,
                           child: Text(
                             ">",
-                            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),
+                            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 20),
                           ),
                           onPressed: () {
                             listPage.increasePage();

@@ -1,5 +1,6 @@
 import 'package:covid19_app/Components/InfoPage/fourBoxChart.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class InfoPage extends StatelessWidget {
   @override
