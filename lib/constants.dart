@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+enum ChartView { week, month }
+
+enum FigureType { cases, death, discharge, critical}
+
 const appTitle = "Covid-19";
 
 const primaryColor = Color(0xFF031D44);

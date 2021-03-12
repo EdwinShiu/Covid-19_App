@@ -9,6 +9,8 @@ import 'package:covid19_app/Pages/Info/infoPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Data/caseFigures.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -40,20 +42,26 @@ class HomePageState extends State<HomePage> {
         value: fetchCases(),
         builder: (context, _) {
           final cases = Provider.of<CaseApi>(context);
-          print(cases);
-          if (cases == null) {
-            return LoadingScreen(Color(0xFF333333));
-          }
-          return Scaffold(
-            bottomNavigationBar: BottomNavBar(_mainPageController),
-            body: PageView(
-              physics: NeverScrollableScrollPhysics(),
-              controller: _mainPageController,
-              children: [
-                InfoPage(),
-                CasePage(),
-              ],
-            ),
+          return FutureProvider<CaseFiguresApi>.value(
+            value: fetchCaseFigures(),
+            builder: (context, _) {
+              final figures = Provider.of<CaseFiguresApi>(context);
+
+              if (cases == null || figures == null) {
+                return LoadingScreen(Color(0xFF333333));
+              }
+              return Scaffold(
+                bottomNavigationBar: BottomNavBar(_mainPageController),
+                body: PageView(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: _mainPageController,
+                  children: [
+                    InfoPage(),
+                    CasePage(),
+                  ],
+                ),
+              );
+            }
           );
         },
       ),
