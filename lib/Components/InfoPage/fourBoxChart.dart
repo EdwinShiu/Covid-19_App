@@ -2,6 +2,7 @@ import 'package:covid19_app/Data/caseFigures.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 import 'dart:core';
 import '../../constants.dart';
@@ -34,8 +35,8 @@ class FourBoxChart extends StatelessWidget {
     //print("minValue" + minValue.toString());
     int maxValue = temp.reduce(max) + 10;
     int bound = ((maxValue - minValue) / 100).ceil() * 100;
-    print("value " + value.toString());
-    print((value - minValue) * 4 / bound);
+    //print("value " + value.toString());
+    //print((value - minValue) * 4 / bound);
     return (value - minValue) * 4 / bound + 1;
   }
 
@@ -55,7 +56,7 @@ class FourBoxChart extends StatelessWidget {
       const Color(0xff23b6e6),
       const Color(0xff02d39a),
     ];
-    print(data);
+    //print(data);
     return LineChartData(
       lineTouchData: LineTouchData(enabled: false),
       gridData: FlGridData(
@@ -114,11 +115,66 @@ class FourBoxChart extends StatelessWidget {
     return DateTime.utc(int.parse(date.substring(6, 10)), int.parse(date.substring(3, 5)), int.parse(date.substring(0, 2)));
   }
 
+  int getValueDifference(List list) {
+    if (list == null || list.length == 0) {
+      return null;
+    }
+    int prev = 0;
+    if (list.length > 1) {
+      prev = int.parse(list[list.length - 2]["value"].toString());
+    }
+    int now = int.parse(list[list.length - 1]["value"].toString());
+    return now - prev;
+  }
+
+  List<Widget> showIndicator(BuildContext context, List list, bool upPositive) {
+    int value = getValueDifference(list);
+    int isShow = 0;
+    Color color;
+    if (value == null) {
+      return [
+        SizedBox(height: 18),
+        Text(
+          "--",
+          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 32),
+        ),
+        SizedBox(height: 18),
+      ];
+    }
+    if (value > 0) {
+      color = upPositive ? Colors.green : Colors.red;
+      isShow = 1;
+    } else if (value < 0) {
+      color = upPositive ? Colors.red : Colors.green;
+      isShow = -1;
+    } else {
+      color = Color(0xFF333333);
+    }
+    return [
+      (isShow == 1) ? FaIcon(
+        FontAwesomeIcons.angleUp,
+        size: 16,
+        color: color,
+      ) : SizedBox(height: 18),
+      SizedBox(height: 3),
+      Text(
+        value.toString(),
+        style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 32, color: color),
+      ),
+      SizedBox(height: 3),
+      (isShow == -1) ? FaIcon(
+        FontAwesomeIcons.angleDown,
+        size: 16,
+        color: color,
+      ) : SizedBox(height: 18),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
 
     final figures = Provider.of<CaseFiguresApi>(context)?.caseFigures;
-    print(figures?.length);
+    //print(figures?.length);
     final lastDate = getLastDate(figures);
     
 
@@ -129,34 +185,143 @@ class FourBoxChart extends StatelessWidget {
       children: [
         Flexible(
           flex: 1,
-          child: Container(
-            //height: height,
-            margin: EdgeInsets.all(5),
-            child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.confirmCase})).toList(), ChartView.week),
+          child: Row(
+            children: [
+              Container(
+                width: 80,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      "Confirm",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      "Cases",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: showIndicator(context, figures.map((d) => ({"date": d.date, "value": d.confirmCase})).toList(), false),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.confirmCase})).toList(), ChartView.week),
+              ),
+            ],
           ),
         ),
         Flexible(
           flex: 1,
-          child: Container(
-            //height: height,
-            margin: EdgeInsets.all(5),
-            child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.deathCase})).toList(), ChartView.week),
+          child: Row(
+            children: [
+              Container(
+                width: 80,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      "Death",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      "Cases",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: showIndicator(context, figures.map((d) => ({"date": d.date, "value": d.deathCase})).toList(), false),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.deathCase})).toList(), ChartView.week),
+              ),
+            ]
           ),
         ),
         Flexible(
           flex: 1,
-          child: Container(
-            //height: height,
-            margin: EdgeInsets.all(5),
-            child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.dischargeCase})).toList(), ChartView.week),
+          child: Row(
+            children: [
+              Container(
+                width: 80,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      "Discharge",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      "Cases",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: showIndicator(context, figures.map((d) => ({"date": d.date, "value": d.dischargeCase})).toList(), true),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.dischargeCase})).toList(), ChartView.week),
+              ),
+            ],
           ),
         ),
         Flexible(
           flex: 1,
-          child: Container(
-            //height: height,
-            margin: EdgeInsets.all(5),
-            child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.criticalCondition})).toList(), ChartView.week),
+          child: Row(
+            children: [
+              Container(
+                width: 80,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      "Critical",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      "Condition",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 31),
+                        child: Text(
+                          figures[figures.length-1].criticalCondition.toString(),
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 32, color: Color(0xFF333333)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: lineGraph(figures.map((d) => ({"date": d.date, "value": d.criticalCondition})).toList(), ChartView.week),
+              ),
+            ],
           ),
         ),
       ],
