@@ -31,7 +31,7 @@ class CaseRecord extends StatelessWidget {
   Widget build(BuildContext context) {
     final cases = Provider.of<CaseApi>(context, listen: false);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Color.fromRGBO(245, 250, 250, 1),
@@ -57,7 +57,7 @@ class CaseRecord extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 8,
+            flex: 7,
             child: Stack(
               children: [
                 Container(
@@ -71,7 +71,7 @@ class CaseRecord extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
                   ),
-                  margin: EdgeInsets.only(right: 10),
+                  margin: EdgeInsets.only(right: 8),
                   padding: EdgeInsets.all(5),
                   child: Column(
                     children: [
